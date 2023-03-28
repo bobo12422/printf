@@ -1,9 +1,9 @@
-#include <stdarg.h>
+i#include "main.h"
 #include <unistd.h>
-#include <stdio.h>
-#include "main.h"
+#include <stdlib.h>
 
 /**
+<<<<<<< HEAD
 * _strlen - Calculates the length of a string.
 * @s: The string to be measured.
 *
@@ -53,25 +53,47 @@ int print_string(va_list args)
 * Return: The number of characters printed.
 */
 
+=======
+ * _printf - prints a formatted string to the standard output
+ * @format: format string
+ *
+ * Return: the number of characters printed, excluding the null byte
+ */
+>>>>>>> origin
 int _printf(const char *format, ...)
 {
-	int i = 0, j, count = 0;
 	va_list args;
+<<<<<<< HEAD
 	fmt_t fmts[] = {{'c', print_char},
 			{'s', print_string},
 			{'d', print_number},
 			{'i', print_number},
 			{'\0', NULL}};
+=======
+	int printed_chars = 0;
+
+	if (format == NULL)
+		return (-1);
+>>>>>>> origin
 
 	va_start(args, format);
 
-	while (format && format[i])
+	while (*format)
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			j = 0;
-			while (fmts[j].type)
+			format++;
+			if (*format == '%')
 			{
+				printed_chars += write(1, "%", 1);
+			}
+			else if (*format == 'c')
+			{
+				printed_chars += write(1, va_arg(args, int), 1);
+			}
+			else if (*format == 's')
+			{
+<<<<<<< HEAD
 				if (format[i + 1] == '%')
 				{
 					count += write(1, &format[i], 1);
@@ -85,15 +107,29 @@ int _printf(const char *format, ...)
 					break;
 				}
 				j++;
+=======
+				char *s = va_arg(args, char *);
+				if (s == NULL)
+					s = "(null)";
+				printed_chars += write(1, s, _strlen(s));
+>>>>>>> origin
 			}
-			if (!fmts[j].type)
-				count += write(1, &format[i], 1);
+			else
+			{
+				printed_chars += write(1, "%", 1);
+				printed_chars += write(1, &(*format), 1);
 			}
+		}
 		else
-			count += write(1, &format[i], 1);
-		i++;
+		{
+			printed_chars += write(1, &(*format), 1);
+		}
+
+		format++;
 	}
+
 	va_end(args);
-	return (count);
+
+	return (printed_chars);
 }
 
