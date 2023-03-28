@@ -2,8 +2,9 @@
 #define MAIN_H
 
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-<<<<<<< HEAD
 int _putchar(char c);
 int _strlen(char *s);
 int print_char(va_list args);
@@ -22,9 +23,5 @@ typedef struct dt
 	int (*func)(va_list);
 } fmt_t;
 
-=======
-int _printf(const char *format, ...);
-
->>>>>>> origin
 #endif /* MAIN_H */
 
