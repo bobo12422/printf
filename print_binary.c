@@ -11,10 +11,16 @@ int print_binary(va_list args)
 	int i, size;
 	char *b;
 	int x, y, tmp;
-	unsigned int num = va_arg(args, int);
+	int num = va_arg(args, int);
+
+	if (num < 0)
+		return (-1);
 
 	size = int_len(num);
 	b = malloc(sizeof(b) * size);
+	if (b == NULL)
+		return (-1);
+
 	for (i = 0; num > 0; i++)
 	{
 		b[i] = (num % 2) + '0';
