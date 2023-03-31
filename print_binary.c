@@ -15,7 +15,12 @@ int print_binary(va_list args)
 
 	if (num < 0)
 		return (-1);
-
+	if (num == 0)
+	{
+		b = malloc(2);
+		b[0] = '0';
+		return (write(1, b, 1));
+	}
 	size = int_len(num);
 	b = malloc(sizeof(b) * size);
 	if (b == NULL)
