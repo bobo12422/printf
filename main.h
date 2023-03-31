@@ -9,7 +9,7 @@ int _putchar(char c);
 int _strlen(char *s);
 int print_char(va_list args);
 int print_string(va_list args);
-int print_number(va_list args);
+int print_int(va_list args);
 int _printf(const char *format, ...);
 
 /**

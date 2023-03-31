@@ -16,8 +16,8 @@ int _printf(const char *format, ...)
 	va_list args;
 	fmt_t fmts[] = {{'c', print_char},
 			{'s', print_string},
-			{'d', print_number},
-			{'i', print_number},
+			{'d', print_int},
+			{'i', print_int},
 			{'\0', NULL}};
 
 	va_start(args, format);
@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			j = 0;
-			while (fmts[j].type)
+			while (fmts[j].type != '\0')
 			{
 				if (format[i + 1] == '%')
 				{
